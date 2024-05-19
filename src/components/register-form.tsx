@@ -17,11 +17,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ErrorMessage } from "./error-message"
 import { useEffect, useState } from "react"
 import { RegisterSchema } from "@/schema/registerschema"
-import { LuLoader } from "react-icons/lu"
+import { LuLoader, LuLoader2 } from "react-icons/lu"
 import Register from "@/actions/register"
 import { SuccessMessage } from "./success-message"
 import { get_user_by_username } from "@/lib/data/user"
-import { existing_username } from "@/actions/other_actions"
+import { existing_email, existing_username } from "@/actions/other_actions"
 
 type register_schema_type = z.infer<typeof RegisterSchema>
 
@@ -32,6 +32,7 @@ export function RegisterForm() {
     const [success, setSuccess] = useState<string | undefined>("");
 
     const [username, setUsername] = useState<string>("")
+    const [email, setEmail] = useState<string>("")
 
     const {
         handleSubmit,
@@ -65,6 +66,10 @@ export function RegisterForm() {
             return;
         }
 
+        if(username){
+            setError("")
+        }
+
         const checkUsername = async () => {
             setError("");
             const result = await existing_username(username);
@@ -79,6 +84,31 @@ export function RegisterForm() {
             checkUsername();
         }
     }, [username]);
+
+    useEffect(() => {
+        if(email.length < 6){
+            setError("")
+            return;
+        }
+
+        if(email){
+            setError("")
+        }
+
+        const checkEmail = async () => {
+            setError("");
+            const result = await existing_email(email);
+            if(result){
+                setError("Email Already Taken.");
+            } else {
+                setError('');
+            }
+        };
+
+        if (email) {
+            checkEmail();
+        }
+    }, [email]);
 
     return (
         <form onSubmit={handleSubmit(hangleLogin)} >
@@ -98,6 +128,7 @@ export function RegisterForm() {
                             id="email"
                             placeholder="abc@example.com"
                             className="font-mono"
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         {errors.email && <ErrorMessage message={errors.email.message} />}
                     </div>
@@ -129,7 +160,7 @@ export function RegisterForm() {
                     </div>
                 </CardContent>
                 <CardFooter className="flex flex-col">
-                    <Button type="submit" disabled={isLoading || !!error} className="w-full hover:bg-white hover:text-black transition">{isLoading ? <LuLoader className="animate-spin"/> : "Register"}</Button>
+                    <Button type="submit" disabled={isLoading || !!error} className="w-full hover:bg-white hover:text-black transition">{isLoading ? <LuLoader2 className="animate-spin"/> : "Register"}</Button>
                     <div className="grid grid-cols-2 gap-2 m-2 w-full">
                         <Button disabled={isLoading} variant="outline"  className="w-full hover:bg-white hover:text-black transition"><FaGoogle className="ml-2 size-5" /></Button>
                         <Button disabled={isLoading} variant="outline"  className="w-full hover:bg-white hover:text-black transition"><FaLinkedin className="ml-2 size-5" /></Button>

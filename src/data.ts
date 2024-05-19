@@ -5,6 +5,18 @@
 export const PROJECT_NAME = "SilkRoute"
 
 /**
+ * Specifies the Base URL of the project, can be changed later
+ * @type[string]
+ */
+export const BASE_URL = "http://localhost:3000"
+
+/**
+ * Time after which the verification token expires
+ * @type {number}
+ */
+export const VERIFICATION_TOKEN_EXPIRE_TIME : number = 3600;
+
+/**
  * 
  */
 export const MenuItems = [

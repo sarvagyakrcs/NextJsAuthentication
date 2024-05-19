@@ -4,6 +4,9 @@ import { LoginSchema } from "@/schema/loginschema"
 import { AuthError } from "next-auth"
 import { signIn } from "@/auth"
 import * as z from "zod"
+import { get_user_by_email } from "@/lib/data/user"
+import { generateVerificationToken } from "@/lib/tokens"
+import { sendVerificationEmail } from "@/lib/mail"
 
 export const Login = async (credentials : z.infer<typeof LoginSchema>) => {
     const {
@@ -22,6 +25,31 @@ export const Login = async (credentials : z.infer<typeof LoginSchema>) => {
         email,
         password
     } = data;
+
+    const existing_user = await get_user_by_email(email);
+
+    if(!existing_user || !existing_user.email){
+        return {
+            "error" : "Email does not Exist!",
+            success_status: false
+        }
+    }
+
+    if(!existing_user.password){
+        return {
+            "error" : "Please Login Using Correct Mode!",
+            success_status: false
+        }
+    }
+
+    if(!existing_user.emailVerified){
+        const verificationToken = await generateVerificationToken(existing_user.email);
+        sendVerificationEmail(verificationToken.email, verificationToken.token)
+        return {
+            "success" : "Verification Email Sent.",
+            success_status: true
+        }
+    }
 
     try {
         await signIn("credentials", {

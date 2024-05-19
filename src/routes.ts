@@ -20,7 +20,8 @@ export const apiAuthPrefix = '/api/auth'
 */
 export const authRoutes = [
     '/login',
-    '/register'
+    '/register',
+    '/error',
 ]
 
 /** 
@@ -29,5 +30,6 @@ export const authRoutes = [
  * @type {string}
 */
 export const publicRoutes = [
-    '/'
+    '/',
+    '/new-verification'
 ]

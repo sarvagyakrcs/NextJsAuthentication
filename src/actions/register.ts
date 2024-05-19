@@ -5,6 +5,8 @@ import { RegisterSchema } from "@/schema/registerschema"
 import * as z from "zod"
 type schema_type = z.infer< typeof RegisterSchema >
 import bcrypt from "bcryptjs"
+import { generateVerificationToken } from "@/lib/tokens"
+import { sendVerificationEmail } from "@/lib/mail"
 
 const Register = async (credentials : schema_type) => {
     const {
@@ -43,8 +45,12 @@ const Register = async (credentials : schema_type) => {
         }
     })
 
+    const verificationToken = await generateVerificationToken(data.email)
+
+    await sendVerificationEmail(verificationToken.email, verificationToken.token)
+
     return {
-        'success' : 'User Created Successfully.'
+        'success' : 'Confirmation Email Sent!.'
     }
 }
 

@@ -1,5 +1,6 @@
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { Cross1Icon, Cross2Icon, ExclamationTriangleIcon } from '@radix-ui/react-icons'
 import React from 'react'
+import { Button } from './ui/button'
 
 type Props = {
 	message: string | undefined

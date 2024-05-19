@@ -6,17 +6,26 @@ import { get_user_by_id } from "./lib/data/user";
 const db = prisma;
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+	pages: {
+		signIn: '/login',
+		error: '/error'
+	},
 	adapter: PrismaAdapter(db),
 	session: {
 		strategy: "jwt",
 	},
 	callbacks: {
-		async signIn({ user }){
-			// const existing_user = await get_user_by_id(user.id);
-			// if(!existing_user || !existing_user.emailVerified){
-			// 	//dont allow non verified users to login
-			// 	return false;
-			// }
+		async signIn({ user, account }){
+			const existing_user = await get_user_by_id(user.id);
+			if(account?.provider !== "credentials"){
+				//allow OAuth users to login without email verification
+				return true;
+			}
+			if(!existing_user || !existing_user?.emailVerified){
+				//dont allow non verified users to login
+				return false;
+			}
+			// TODO : Add 2FA check
 			return true;
 		},
 		async jwt({token}){

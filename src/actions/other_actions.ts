@@ -8,3 +8,11 @@ export const existing_username = async (username : string) => {
     }
     return false
 }
+
+export const existing_email = async (email : string) => {
+    const user = await get_user_by_email(email);
+    if(user){
+        return true
+    }
+    return false
+}
