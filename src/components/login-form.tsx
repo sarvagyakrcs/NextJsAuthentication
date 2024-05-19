@@ -70,7 +70,7 @@ export function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit(hangleLogin)} className="">
-            <Card className="w-full max-w-sm bg-dark-bg text-gray-300 border-none ">
+            <Card className="w-full my-6 max-w-sm bg-dark-bg text-gray-300 border-none ">
                 <CardHeader>
                     <CardTitle className="text-2xl">Login</CardTitle>
                     <CardDescription>
@@ -109,11 +109,16 @@ export function LoginForm() {
                         <Button variant="outline" className="w-full  hover:bg-white hover:text-black transition"><FaGoogle className="ml-2 size-5" /></Button>
                         <Button variant="outline" disabled={isLoading} className="w-full hover:bg-white hover:text-black transition"><FaGithub className="ml-2 size-5" /></Button>
                     </div>
-                    <span className="p-4 text-sm">Not Have an Account? <a className="text-blue-500 underline" href="/register">Register</a></span>
+                    <a className="text-blue-500 hover:underline p-4 text-sm" href="/password/reset/form"><span className="p-4 text-sm">Forgotten Your Password? </span></a>
                     <span className="text-sm">Lost, Want to Go Back? <a className="text-blue-500 underline" href="/">Home</a></span>
                     {errors.root && <ErrorMessage message={errors.root.message} />}
                 </CardFooter>
             </Card>
+            <div className="border-x-white m-2"></div>
+            <Card className="p-2 text-sm w-full max-w-sm flex items-center justify-center bg-dark-bg text-gray-300 border-none ">
+                <a href="/register" className="text-blue-500 text-center hover:underline brightness-95" >Create New Account</a>
+            </Card>
         </form>
+        
     )
 }

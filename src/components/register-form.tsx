@@ -112,7 +112,7 @@ export function RegisterForm() {
 
     return (
         <form onSubmit={handleSubmit(hangleLogin)} >
-            <Card className="w-full max-w-sm bg-dark-bg text-gray-300 border-none ">
+            <Card className="w-full max-w-sm my-6 bg-dark-bg text-gray-300 border-none ">
                 <CardHeader>
                     <CardTitle className="text-2xl">Sign Up</CardTitle>
                     <CardDescription>
@@ -169,6 +169,9 @@ export function RegisterForm() {
                     <span className="text-sm">Lost, Want to Go Back? <a className="text-blue-500 underline" href="/">Home</a></span>
                     {errors.root && <ErrorMessage message={errors.root.message} />}
                 </CardFooter>
+            </Card>
+            <Card className="p-2 text-sm w-full max-w-sm flex items-center justify-center bg-dark-bg text-gray-300 border-none ">
+                <a href="/login" className="text-blue-500 text-center hover:underline brightness-95" >Login to Existing Account</a>
             </Card>
         </form>
     )

@@ -11,10 +11,16 @@ export const PROJECT_NAME = "SilkRoute"
 export const BASE_URL = "http://localhost:3000"
 
 /**
- * Time after which the verification token expires
+ * Time in seconds after which the verification token expires
  * @type {number}
  */
-export const VERIFICATION_TOKEN_EXPIRE_TIME : number = 3600;
+export const VERIFICATION_TOKEN_EXPIRE_TIME : number = 3600; //1Hr
+
+/**
+ * Time in seconds after which the verification token expires
+ * @type {number}
+ */
+export const PASSWORD_RESET_TOKEN_EXPIRE_TIME : number = 3600; //1Hr
 
 /**
  * 
