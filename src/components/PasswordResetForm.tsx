@@ -66,7 +66,7 @@ const PasswordResetForm = (props: Props) => {
                     <CardTitle className="text-2xl text-center">Reset Your Password</CardTitle>
                     <CardDescription className="flex text-center items-center flex-col justify-center" >
                         <LockClosedIcon className="size-10 m-3" />
-                        Please enter your email address, and we'll send you a link to get back into your account.
+                        Please enter your email address, and we will send you a link to get back into your account.
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4">
