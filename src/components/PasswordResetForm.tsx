@@ -64,10 +64,10 @@ const PasswordResetForm = (props: Props) => {
             <Card className="w-full my-6 max-w-sm bg-dark-bg text-gray-300 border-none ">
                 <CardHeader>
                     <CardTitle className="text-2xl text-center">Reset Your Password</CardTitle>
-                    <CardDescription className="flex text-center items-center flex-col justify-center" >
+{/*                     <CardDescription className="flex text-center items-center flex-col justify-center" >
                         <LockClosedIcon className="size-10 m-3" />
                         {"Please enter your email address, and we will send you a link to get back into your account."}
-                    </CardDescription>
+                    </CardDescription> */}
                 </CardHeader>
                 <CardContent className="grid gap-4">
                     <div className="grid gap-2">
