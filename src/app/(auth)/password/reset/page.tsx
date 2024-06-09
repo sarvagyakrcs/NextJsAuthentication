@@ -1,6 +1,7 @@
 import PasswordResetForm from '@/components/PasswordResetForm'
 import PasswordResetVerification from '@/components/PasswordResetVerification'
 import { useSearchParams } from 'next/navigation';
+import React, { Suspense } from 'react';
 
 type Props = {}
 
